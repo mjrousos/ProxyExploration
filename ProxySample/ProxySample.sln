@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFxConsoleApp", "NetFxConsoleApp\NetFxConsoleApp.csproj", "{6C7BC8E3-2CB4-4D30-ADEA-4DE73C13A3E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealProxyConsoleApp", "RealProxyConsoleApp\RealProxyConsoleApp.csproj", "{6C7BC8E3-2CB4-4D30-ADEA-4DE73C13A3E5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProxyLibrary", "ProxyLibrary\ProxyLibrary.csproj", "{D101A1D4-64E1-4232-B3CD-D0DC49CA1A3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreConsoleApp", "NetCoreConsoleApp\NetCoreConsoleApp.csproj", "{31418B53-ED72-464C-AE04-7FDC1EF4634F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DispatchProxyConsoleApp", "DispatchProxyConsoleApp\DispatchProxyConsoleApp.csproj", "{31418B53-ED72-464C-AE04-7FDC1EF4634F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicProxyConsoleApp", "DynamicProxyConsoleApp\DynamicProxyConsoleApp.csproj", "{A195B654-024A-4341-876E-341D2992963E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,18 @@ Global
 		{31418B53-ED72-464C-AE04-7FDC1EF4634F}.Release|x64.Build.0 = Release|Any CPU
 		{31418B53-ED72-464C-AE04-7FDC1EF4634F}.Release|x86.ActiveCfg = Release|Any CPU
 		{31418B53-ED72-464C-AE04-7FDC1EF4634F}.Release|x86.Build.0 = Release|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Debug|x64.Build.0 = Debug|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Debug|x86.Build.0 = Debug|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Release|x64.ActiveCfg = Release|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Release|x64.Build.0 = Release|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Release|x86.ActiveCfg = Release|Any CPU
+		{A195B654-024A-4341-876E-341D2992963E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

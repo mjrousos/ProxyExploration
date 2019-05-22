@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace NetCoreConsoleApp
+namespace DispatchProxyConsoleApp
 {
     interface IWidget
     {
