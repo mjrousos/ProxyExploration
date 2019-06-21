@@ -21,7 +21,7 @@ namespace DynamicProxyConsoleApp
             Console.WriteLine("--------------------------------");
             Console.WriteLine();
 
-            var widget = DynamicProxyLoggingDecorator.DecorateViaInheritance(new Widget("Widgetty", 9.99));
+            var widget = DynamicProxyLoggingDecorator.DecorateViaInheritance<Widget>();
 
             // Set property
             widget.Color = Color.Red;
@@ -39,17 +39,14 @@ namespace DynamicProxyConsoleApp
 
             // Set field
             // DynamicProxy class proxies allow access to fields (since they subclass the target),
-            // but don't intercept the access and - more confusingly - don't work properly in
-            // 'class proxy with target' scenarios since field access will go to the proxy object - 
-            // *not* to the target object.
+            // but don't intercept the access. 
             widget._description = "The best widget of all!";
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
 
             // Get field
-            // This appears to work, but the updated description won't be used by the subsequent ToString call
-            // (since that method will run on the target object and the field was updated on the proxy object).
+            // As with setting fields, this will work but will not be intercepted.
             Console.WriteLine($"Description updated to : {widget._description}");
 
             Console.WriteLine();
@@ -80,7 +77,6 @@ namespace DynamicProxyConsoleApp
             Console.WriteLine();
 
             // Call method that throws exception
-
             try
             {
                 widget.BuyWidget();
@@ -125,8 +121,6 @@ namespace DynamicProxyConsoleApp
             Console.WriteLine();
 
             // Get field
-            // This appears to work, but the updated description won't be used by the subsequent ToString call
-            // (since that method will run on the target object and the field was updated on the proxy object).
             Console.WriteLine($"Description updated to : {undecoratedWidget._description}");
 
             Console.WriteLine();
@@ -157,7 +151,6 @@ namespace DynamicProxyConsoleApp
             Console.WriteLine();
 
             // Call method that throws exception
-
             try
             {
                 widget.BuyWidget();

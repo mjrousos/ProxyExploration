@@ -62,13 +62,24 @@ namespace NetFxConsoleApp
             Console.WriteLine();
             Console.WriteLine();
 
-            // Call method that throws exception
+            // Use the proxy as a Widget object
+            DisplayWidget(widget);
 
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            // Call method that throws exception
             try
             {
                 widget.BuyWidget();
             }
             catch (NotSupportedException) { }
+        }
+
+        public static void DisplayWidget(Widget w)
+        {
+            Console.WriteLine($"Widget: {w.ToString()}");
         }
     }
 }

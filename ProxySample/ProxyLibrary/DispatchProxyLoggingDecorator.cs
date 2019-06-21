@@ -6,8 +6,11 @@ using System.Reflection;
 
 namespace ProxyLibrary
 {
-    public class DispatchProxyLoggingDecorator<T> : DispatchProxy where T: class
+    // Simple sample DispatchProxy-based logging proxy
+    public class DispatchProxyLoggingDecorator<T> : DispatchProxy 
+        where T: class // T must be an interface
     {
+        // The Serilog logger to be used for logging.
         private readonly Logger _logger;
 
         // Expose the target object as a read-only property so that users can access
@@ -18,40 +21,56 @@ namespace ProxyLibrary
         // new proxy instance is Created
         public DispatchProxyLoggingDecorator() : base()
         {
+            // Setup the Serilog logger
             _logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.Console().CreateLogger();
             _logger.Information("New logging decorator created for object of type {TypeName}", typeof(T).FullName);
         }
 
+        // This convenience method creates an instance of DispatchProxyLoggingDecorator,
+        // sets the target object, and calls DispatchProxy's Create method to retrieve the 
+        // proxy implementation of the target interface (which looks like an instance of T 
+        // but calls our Invoke method whenever an API is used).
         public static T Decorate(T target)
         {
+            // DispatchProxy.Create creates proxy objects
             var proxy = Create<T, DispatchProxyLoggingDecorator<T>>()
                 as DispatchProxyLoggingDecorator<T>;
 
+            // If the proxy wraps an underlying object, it must be supplied after creating
+            // the proxy.
             proxy.Target = target ?? throw new ArgumentNullException(nameof(target));
 
             return proxy as T;
         }
 
+        // The invoke method is the heart of a DispatchProxy implementation. Here, we
+        // define what should happen when a method on the proxied object is used. The
+        // signature is a little simpler than RealProxy's since a MethodInfo and args
+        // are passed in directly.
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
-            using (LogContext.PushProperty("ActivityId", Guid.NewGuid()))
+            try
             {
-                try
-                {
-                    _logger.Information("Calling method {TypeName}.{MethodName} with arguments {Arguments}", targetMethod.DeclaringType.Name, targetMethod.Name, args);
+                // Perform the logging that this proxy is meant to provide
+                _logger.Information("Calling method {TypeName}.{MethodName} with arguments {Arguments}", targetMethod.DeclaringType.Name, targetMethod.Name, args);
 
-                    var result = targetMethod.Invoke(Target, args);
-                    _logger.Information("Method {TypeName}.{MethodName} returned {ReturnValue}", targetMethod.DeclaringType.Name, targetMethod.Name, result);
-                    return result;
-                }
-                catch (TargetInvocationException exc)
-                {
-                    _logger.Warning(exc.InnerException, "Method {TypeName}.{MethodName} threw exception: {Exception}", targetMethod.DeclaringType.Name, targetMethod.Name, exc.InnerException);
+                // For this proxy implementation, we still want to call the original API 
+                // (after logging has happened), so use reflection to invoke the desired
+                // API on our wrapped target object.
+                var result = targetMethod.Invoke(Target, args);
 
-                    throw exc.InnerException;
-                }
+                // A little more logging.
+                _logger.Information("Method {TypeName}.{MethodName} returned {ReturnValue}", targetMethod.DeclaringType.Name, targetMethod.Name, result);
+
+                return result;
+            }
+            catch (TargetInvocationException exc)
+            {
+                _logger.Warning(exc.InnerException, "Method {TypeName}.{MethodName} threw exception: {Exception}", targetMethod.DeclaringType.Name, targetMethod.Name, exc.InnerException);
+
+                throw exc.InnerException;
             }
         }
 

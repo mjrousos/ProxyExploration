@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFxConsoleApp
 {
-    class Widget : MarshalByRefObject
+    sealed class Widget : MarshalByRefObject
     {
         private string _name;
         private double _price;
