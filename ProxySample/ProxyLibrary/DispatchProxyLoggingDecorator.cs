@@ -68,6 +68,7 @@ namespace ProxyLibrary
             }
             catch (TargetInvocationException exc)
             {
+                // If the MethodInvoke.Invoke call fails, log a warning and then rethrow the exception
                 _logger.Warning(exc.InnerException, "Method {TypeName}.{MethodName} threw exception: {Exception}", targetMethod.DeclaringType.Name, targetMethod.Name, exc.InnerException);
 
                 throw exc.InnerException;

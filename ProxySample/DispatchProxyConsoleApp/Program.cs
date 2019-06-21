@@ -11,7 +11,7 @@ namespace DispatchProxyConsoleApp
         {
             var undeocratedWidget = new Widget("Widgetty", 9.99);
 
-            // Note that the proxy is of type IWidget rather than Widget
+            // Note that the proxy is of type IWidget rather than Widget.
             // The returned object is actually of type DispatchProxyLoggingDecorator
             // (so any helper methods on that type can be used in addition to IWidget APIs)
             var widget = DispatchProxyLoggingDecorator<IWidget>.Decorate(undeocratedWidget);

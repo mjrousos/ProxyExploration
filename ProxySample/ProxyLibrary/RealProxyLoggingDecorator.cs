@@ -10,6 +10,7 @@ using System.Runtime.Remoting.Proxies;
 namespace ProxyLibrary
 {
     // Simple sample RealProxy-based logging proxy
+    // Note that the proxied type must derive from MarshalByRefObject
     public class RealProxyLoggingDecorator<T> : RealProxy where T: MarshalByRefObject
     {
         // A field to store an inner 'real' instance of the proxied type.
@@ -51,7 +52,7 @@ namespace ProxyLibrary
         }
 
         // The invoke method is the heart of a RealProxy implementation. Here, we
-        // define what should happen when a member on the proxied object is used.
+        // define what should happen when a member on the proxy object is used.
         public override IMessage Invoke(IMessage msg)
         {
             // The IMessage argument should be an IMethodCallMessage indicating
