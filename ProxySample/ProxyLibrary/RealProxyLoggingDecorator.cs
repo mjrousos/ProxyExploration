@@ -1,4 +1,4 @@
-﻿#if NET461
+﻿#if NET46
 using Serilog;
 using Serilog.Context;
 using Serilog.Core;
