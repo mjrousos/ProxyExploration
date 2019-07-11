@@ -9,12 +9,12 @@ namespace DispatchProxyConsoleApp
     {
         static async Task Main()
         {
-            var undeocratedWidget = new Widget("Widgetty", 9.99);
+            var undecoratedWidget = new Widget("Widgetty", 9.99);
 
             // Note that the proxy is of type IWidget rather than Widget.
             // The returned object is actually of type DispatchProxyLoggingDecorator
             // (so any helper methods on that type can be used in addition to IWidget APIs)
-            var widget = DispatchProxyLoggingDecorator<IWidget>.Decorate(undeocratedWidget);
+            var widget = DispatchProxyLoggingDecorator<IWidget>.Decorate(undecoratedWidget);
 
             // Set property
             widget.Color = Color.Red;
@@ -59,7 +59,7 @@ namespace DispatchProxyConsoleApp
             Console.WriteLine($"Description updated to : {((DispatchProxyLoggingDecorator<IWidget>)widget).GetFieldValue("_description")}");
 
             // Get field value using the undecorated object
-            Console.WriteLine($"Description updated to : {undeocratedWidget._description}");
+            Console.WriteLine($"Description updated to : {undecoratedWidget._description}");
 
             Console.WriteLine();
             Console.WriteLine();
