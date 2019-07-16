@@ -17,7 +17,7 @@ namespace ProxyLibrary
         // CreateInterfaceProxyWithTarget uses composition-based proxying to wrap a target object with
         // a proxy object implementing the desired interface. Calls are passed to the target object
         // after running interceptors. This model is similar to DispatchProxy.
-        public static T DecorateViaComposition<T>(T target) where T: class
+        public static T DecorateViaComposition<T>(T target = null) where T: class
         {
             var proxy = target != null ?
                 _generator.CreateInterfaceProxyWithTarget(target, new DynamicProxyLoggingInterceptor(typeof(T).Name)) :

@@ -44,12 +44,8 @@ namespace ProxyLibrary
         // and calls RealProxy's GetTransparentProxy method to retrieve the proxy
         // object (which looks like an instance of U but calls our Invoke method
         // whenever an API is used).
-        public static U Decorate<U>(U target = null) where U: MarshalByRefObject
-        {
-            return target == null ?
-                new RealProxyLoggingDecorator<U>().GetTransparentProxy() as U :
-                new RealProxyLoggingDecorator<U>(target).GetTransparentProxy() as U;
-        }
+        public static U Decorate<U>(U target = null) where U: MarshalByRefObject =>
+            new RealProxyLoggingDecorator<U>(target).GetTransparentProxy() as U;
 
         // The invoke method is the heart of a RealProxy implementation. Here, we
         // define what should happen when a member on the proxy object is used.

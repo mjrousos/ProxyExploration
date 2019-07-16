@@ -31,7 +31,7 @@ namespace ProxyLibrary
         // sets the target object, and calls DispatchProxy's Create method to retrieve the 
         // proxy implementation of the target interface (which looks like an instance of T 
         // but calls our Invoke method whenever an API is used).
-        public static T Decorate(T target)
+        public static T Decorate(T target = null)
         {
             // DispatchProxy.Create creates proxy objects
             var proxy = Create<T, DispatchProxyLoggingDecorator<T>>()
@@ -39,7 +39,7 @@ namespace ProxyLibrary
 
             // If the proxy wraps an underlying object, it must be supplied after creating
             // the proxy.
-            proxy.Target = target ?? throw new ArgumentNullException(nameof(target));
+            proxy.Target = target ?? Activator.CreateInstance<T>();
 
             return proxy as T;
         }
