@@ -16,7 +16,6 @@ namespace ProxyLibrary
         {
             // Setup the Serilog logger
             _logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
                 .WriteTo.Console().CreateLogger();
             _logger.Information($"New logging decorator created{(string.IsNullOrWhiteSpace(typeName) ? string.Empty : " for object of type {TypeName}")}", typeName);
         }

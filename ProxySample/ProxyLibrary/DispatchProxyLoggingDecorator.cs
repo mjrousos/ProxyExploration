@@ -23,7 +23,6 @@ namespace ProxyLibrary
         {
             // Setup the Serilog logger
             _logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
                 .WriteTo.Console().CreateLogger();
             _logger.Information("New logging decorator created for object of type {TypeName}", typeof(T).FullName);
         }
