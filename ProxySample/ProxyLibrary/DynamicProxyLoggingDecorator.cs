@@ -23,7 +23,7 @@ namespace ProxyLibrary
                 _generator.CreateInterfaceProxyWithTarget(target, new DynamicProxyLoggingInterceptor(typeof(T).Name)) :
 
                 // There is also a CreateInterfaceProxyWithoutTarget method but that API assumes there is no wrapped object at all,
-                // and only the interceptors are called. That model can be useful but doesn't match the logging example used here.
+                // and only the interceptors are called. That model can be useful but doesn't match the logging example used in this sample.
                 _generator.CreateInterfaceProxyWithTarget<T>(Activator.CreateInstance(typeof(T)) as T, new DynamicProxyLoggingInterceptor(typeof(T).Name));
 
             return proxy;

@@ -17,7 +17,7 @@ namespace ProxyLibrary
         // fields or other implementation-specific details not available through the interface
         public T Target { get; private set; }
 
-        // A DispatchProxy's parameterless ctor is called when a 
+        // DispatchProxy's parameterless ctor is called when a 
         // new proxy instance is Created
         public DispatchProxyLoggingDecorator() : base()
         {
